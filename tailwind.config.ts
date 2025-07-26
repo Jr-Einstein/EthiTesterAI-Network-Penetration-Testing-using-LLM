@@ -1,6 +1,6 @@
 import type { Config } from "tailwindcss"
 
-const config: Config = {
+const config = {
   darkMode: ["class"],
   content: [
     "./pages/**/*.{ts,tsx}",
@@ -21,7 +21,7 @@ const config: Config = {
     extend: {
       fontFamily: {
         sans: ["var(--font-inter)", "system-ui", "sans-serif"],
-        mono: ["var(--font-jetbrains-mono)", "Fira Code", "monospace"],
+        mono: ["var(--font-jetbrains-mono)", "monospace"],
         heading: ["var(--font-poppins)", "system-ui", "sans-serif"],
       },
       colors: {
@@ -58,14 +58,11 @@ const config: Config = {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
-        // Custom Cyber Colors
         cyber: {
-          blue: "#0ea5e9",
-          cyan: "#06b6d4",
+          blue: "#00f5ff",
           purple: "#8b5cf6",
-          green: "#10b981",
-          red: "#ef4444",
-          orange: "#f59e0b",
+          green: "#00ff88",
+          red: "#ff0055",
         },
       },
       borderRadius: {
@@ -83,65 +80,38 @@ const config: Config = {
           to: { height: "0" },
         },
         "fade-in": {
-          "0%": { opacity: "0", transform: "translateY(10px)" },
-          "100%": { opacity: "1", transform: "translateY(0)" },
+          "0%": { opacity: "0" },
+          "100%": { opacity: "1" },
         },
-        "slide-in-right": {
-          "0%": { transform: "translateX(100%)" },
-          "100%": { transform: "translateX(0)" },
-        },
-        "slide-in-left": {
-          "0%": { transform: "translateX(-100%)" },
-          "100%": { transform: "translateX(0)" },
-        },
-        "bounce-in": {
-          "0%": { transform: "scale(0.3)", opacity: "0" },
-          "50%": { transform: "scale(1.05)" },
-          "70%": { transform: "scale(0.9)" },
-          "100%": { transform: "scale(1)", opacity: "1" },
+        "slide-in": {
+          "0%": { transform: "translateY(20px)", opacity: "0" },
+          "100%": { transform: "translateY(0)", opacity: "1" },
         },
         glow: {
-          "0%, 100%": { boxShadow: "0 0 20px rgba(14, 165, 233, 0.5)" },
-          "50%": { boxShadow: "0 0 30px rgba(6, 182, 212, 0.8)" },
+          "0%, 100%": { boxShadow: "0 0 5px #00f5ff" },
+          "50%": { boxShadow: "0 0 20px #00f5ff, 0 0 30px #00f5ff" },
         },
-        "pulse-slow": {
+        "pulse-cyber": {
           "0%, 100%": { opacity: "1" },
           "50%": { opacity: "0.5" },
-        },
-        "spin-slow": {
-          "0%": { transform: "rotate(0deg)" },
-          "100%": { transform: "rotate(360deg)" },
         },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
         "fade-in": "fade-in 0.5s ease-out",
-        "slide-in-right": "slide-in-right 0.3s ease-out",
-        "slide-in-left": "slide-in-left 0.3s ease-out",
-        "bounce-in": "bounce-in 0.6s ease-out",
-        glow: "glow 2s ease-in-out infinite",
-        "pulse-slow": "pulse-slow 3s ease-in-out infinite",
-        "spin-slow": "spin-slow 3s linear infinite",
+        "slide-in": "slide-in 0.5s ease-out",
+        glow: "glow 2s ease-in-out infinite alternate",
+        "pulse-cyber": "pulse-cyber 2s cubic-bezier(0.4, 0, 0.6, 1) infinite",
       },
-      boxShadow: {
-        "neon-blue": "0 0 20px rgba(14, 165, 233, 0.5)",
-        "neon-cyan": "0 0 20px rgba(6, 182, 212, 0.5)",
-        "neon-purple": "0 0 20px rgba(139, 92, 246, 0.5)",
-        "neon-green": "0 0 20px rgba(16, 185, 129, 0.5)",
-        glass: "0 8px 32px 0 rgba(31, 38, 135, 0.37)",
+      backgroundImage: {
+        "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
+        "gradient-conic": "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
+        "cyber-grid":
+          "linear-gradient(rgba(0, 245, 255, 0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(0, 245, 255, 0.1) 1px, transparent 1px)",
       },
       backdropBlur: {
         xs: "2px",
-      },
-      spacing: {
-        "18": "4.5rem",
-        "88": "22rem",
-        "128": "32rem",
-      },
-      screens: {
-        xs: "475px",
-        "3xl": "1600px",
       },
     },
   },

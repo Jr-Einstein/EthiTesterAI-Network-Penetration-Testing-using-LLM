@@ -1,9 +1,7 @@
 import { type NextRequest, NextResponse } from "next/server"
-import { MongoClient } from "mongodb"
 import bcrypt from "bcryptjs"
+import { getDatabase } from "@/lib/mongodb"
 import { sendWelcomeEmail } from "@/lib/nodemailer"
-
-const client = new MongoClient(process.env.MONGODB_URI || "")
 
 export async function POST(request: NextRequest) {
   try {
@@ -13,14 +11,13 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: "Missing required fields" }, { status: 400 })
     }
 
-    await client.connect()
-    const db = client.db("ethitesterai")
+    const db = await getDatabase()
     const users = db.collection("users")
 
     // Check if user already exists
     const existingUser = await users.findOne({ email })
     if (existingUser) {
-      return NextResponse.json({ error: "User already exists" }, { status: 409 })
+      return NextResponse.json({ error: "User already exists" }, { status: 400 })
     }
 
     // Hash password
@@ -31,15 +28,9 @@ export async function POST(request: NextRequest) {
       name,
       email,
       password: hashedPassword,
-      role: "user",
       createdAt: new Date(),
-      isActive: true,
-      lastLogin: null,
-      preferences: {
-        emailNotifications: true,
-        theme: "dark",
-        language: "en",
-      },
+      emailVerified: null,
+      image: null,
     })
 
     // Send welcome email
@@ -54,14 +45,11 @@ export async function POST(request: NextRequest) {
       {
         message: "User created successfully",
         userId: result.insertedId,
-        emailSent: true,
       },
       { status: 201 },
     )
   } catch (error) {
     console.error("Registration error:", error)
     return NextResponse.json({ error: "Internal server error" }, { status: 500 })
-  } finally {
-    await client.close()
   }
 }

@@ -25,6 +25,28 @@
   --glass-bg: rgba(255, 255, 255, 0.1);
   --glass-border: rgba(255, 255, 255, 0.2);
   --glass-backdrop: blur(10px);
+
+  /* New Variables */
+  --background: 222.2 84% 4.9%;
+  --foreground: 210 40% 98%;
+  --card: 222.2 84% 4.9%;
+  --card-foreground: 210 40% 98%;
+  --popover: 222.2 84% 4.9%;
+  --popover-foreground: 210 40% 98%;
+  --primary: 217.2 91.2% 59.8%;
+  --primary-foreground: 222.2 84% 4.9%;
+  --secondary: 217.2 32.6% 17.5%;
+  --secondary-foreground: 210 40% 98%;
+  --muted: 217.2 32.6% 17.5%;
+  --muted-foreground: 215 20.2% 65.1%;
+  --accent: 217.2 32.6% 17.5%;
+  --accent-foreground: 210 40% 98%;
+  --destructive: 0 62.8% 30.6%;
+  --destructive-foreground: 210 40% 98%;
+  --border: 217.2 32.6% 17.5%;
+  --input: 217.2 32.6% 17.5%;
+  --ring: 224.3 76.3% 94.1%;
+  --radius: 0.75rem;
 }
 
 @layer base {
@@ -43,28 +65,29 @@
   }
 
   ::-webkit-scrollbar-track {
-    @apply bg-slate-900/20;
+    background: rgba(15, 23, 42, 0.5);
   }
 
   ::-webkit-scrollbar-thumb {
-    @apply bg-slate-600 rounded-full;
+    background: rgba(0, 245, 255, 0.3);
+    border-radius: 4px;
   }
 
   ::-webkit-scrollbar-thumb:hover {
-    @apply bg-slate-500;
+    background: rgba(0, 245, 255, 0.5);
   }
 }
 
 @layer components {
   /* Cyber Button Styles */
   .cyber-button {
-    @apply relative overflow-hidden bg-gradient-to-r from-blue-600 to-cyan-600 text-white font-semibold py-3 px-6 rounded-lg transition-all duration-300 transform hover:scale-105;
-    box-shadow: var(--neon-blue);
+    @apply relative overflow-hidden bg-gradient-to-r from-cyan-500 to-blue-600 text-white font-medium px-6 py-2 rounded-lg transition-all duration-300 transform hover:scale-105;
+    box-shadow: 0 4px 15px rgba(0, 245, 255, 0.3);
   }
 
   .cyber-button:hover {
     @apply shadow-2xl;
-    box-shadow: var(--neon-cyan);
+    box-shadow: 0 4px 15px rgba(0, 245, 255, 0.5);
   }
 
   .cyber-button::before {
@@ -84,10 +107,21 @@
     @apply rounded-xl shadow-2xl;
   }
 
+  /* Cyber Card Styles */
+  .cyber-card {
+    @apply bg-slate-900/50 backdrop-blur-sm border border-slate-700/50 rounded-lg;
+    background-image: linear-gradient(135deg, rgba(0, 245, 255, 0.1) 0%, rgba(139, 92, 246, 0.1) 100%);
+  }
+
   /* Neon Text Effects */
   .neon-text {
     @apply text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-cyan-400;
     text-shadow: var(--neon-blue);
+  }
+
+  /* Cyber Text Styles */
+  .cyber-text {
+    @apply text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-500;
   }
 
   /* Animated Gradient Background */
@@ -115,6 +149,23 @@
     border-right: 2px solid var(--cyber-blue);
     white-space: nowrap;
     animation: typing 3s steps(40, end), blink-caret 0.75s step-end infinite;
+  }
+
+  /* Neon Glow */
+  .neon-glow {
+    text-shadow: 0 0 5px currentColor, 0 0 10px currentColor, 0 0 15px currentColor;
+  }
+
+  /* Glass Effect */
+  .glass-effect {
+    @apply bg-white/5 backdrop-blur-md border border-white/10;
+  }
+
+  /* Loading Shimmer */
+  .loading-shimmer {
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+    background-size: 200% 100%;
+    animation: shimmer 1.5s infinite;
   }
 }
 
@@ -174,6 +225,18 @@
   }
   .grid-responsive-3 {
     @apply grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3;
+  }
+
+  /* Cyber Grid */
+  .cyber-grid {
+    background-image: linear-gradient(rgba(0, 245, 255, 0.1) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0, 245, 255, 0.1) 1px, transparent 1px);
+    background-size: 50px 50px;
+  }
+
+  /* Scroll Smooth */
+  .scroll-smooth {
+    scroll-behavior: smooth;
   }
 }
 
@@ -272,6 +335,10 @@
 /* Focus Styles for Accessibility */
 .focus-visible:focus {
   @apply outline-none ring-2 ring-blue-500 ring-offset-2 ring-offset-slate-900;
+}
+
+.focus-visible:focus-visible {
+  @apply outline-none ring-2 ring-cyan-500 ring-offset-2 ring-offset-slate-900;
 }
 
 /* Custom Selection Colors */

@@ -9,179 +9,124 @@ const transporter = nodemailer.createTransporter({
 })
 
 export const sendWelcomeEmail = async (userEmail: string, userName: string) => {
-  const mailOptions = {
-    from: process.env.EMAIL_USER,
-    to: userEmail,
-    subject: `Welcome to EthiTesterAI, ${userName}! 🛡️`,
-    html: `
-      <!DOCTYPE html>
-      <html lang="en">
-      <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Welcome to EthiTesterAI</title>
-        <style>
-          body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-            line-height: 1.6;
-            color: #333;
-            max-width: 600px;
-            margin: 0 auto;
-            padding: 20px;
-            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
-          }
-          .container {
-            background: white;
-            border-radius: 12px;
-            padding: 40px;
-            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
-          }
-          .header {
-            text-align: center;
-            margin-bottom: 30px;
-          }
-          .logo {
-            font-size: 28px;
-            font-weight: bold;
-            color: #0ea5e9;
-            margin-bottom: 10px;
-          }
-          .welcome-title {
-            font-size: 24px;
-            color: #1e293b;
-            margin-bottom: 20px;
-          }
-          .section {
-            margin-bottom: 30px;
-          }
-          .section h3 {
-            color: #0ea5e9;
-            font-size: 18px;
-            margin-bottom: 15px;
-            border-bottom: 2px solid #e2e8f0;
-            padding-bottom: 5px;
-          }
-          .feature-list {
-            list-style: none;
-            padding: 0;
-          }
-          .feature-list li {
-            padding: 8px 0;
-            border-left: 3px solid #0ea5e9;
-            padding-left: 15px;
-            margin-bottom: 10px;
-            background: #f8fafc;
-            border-radius: 4px;
-          }
-          .cta-button {
-            display: inline-block;
-            background: linear-gradient(135deg, #0ea5e9 0%, #3b82f6 100%);
-            color: white;
-            padding: 12px 30px;
-            text-decoration: none;
-            border-radius: 8px;
-            font-weight: 600;
-            margin: 20px 0;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-          }
-          .footer {
-            text-align: center;
-            margin-top: 40px;
-            padding-top: 20px;
-            border-top: 1px solid #e2e8f0;
-            color: #64748b;
-            font-size: 14px;
-          }
-          .security-tip {
-            background: #fef3c7;
-            border: 1px solid #f59e0b;
-            border-radius: 8px;
-            padding: 15px;
-            margin: 20px 0;
-          }
-          .security-tip strong {
-            color: #92400e;
-          }
-        </style>
-      </head>
-      <body>
-        <div class="container">
-          <div class="header">
-            <div class="logo">🛡️ EthiTesterAI</div>
-            <h1 class="welcome-title">Welcome ${userName}!</h1>
-            <p>Thank you for joining the future of ethical penetration testing and cybersecurity automation.</p>
-          </div>
-
+  const htmlContent = `
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Welcome to EthiTesterAI</title>
+      <style>
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin: 0; padding: 0; background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%); color: #ffffff; }
+        .container { max-width: 600px; margin: 0 auto; padding: 20px; }
+        .header { text-align: center; padding: 30px 0; background: linear-gradient(135deg, #0ea5e9 0%, #3b82f6 100%); border-radius: 10px; margin-bottom: 30px; }
+        .logo { font-size: 28px; font-weight: bold; color: #ffffff; text-shadow: 0 0 10px rgba(14, 165, 233, 0.5); }
+        .welcome-text { font-size: 24px; margin: 20px 0; color: #00f5ff; }
+        .content { background: rgba(30, 41, 59, 0.8); padding: 30px; border-radius: 10px; border: 1px solid rgba(0, 245, 255, 0.2); }
+        .section { margin: 25px 0; }
+        .section h3 { color: #00f5ff; font-size: 18px; margin-bottom: 15px; }
+        .feature-list { list-style: none; padding: 0; }
+        .feature-list li { padding: 8px 0; border-left: 3px solid #00f5ff; padding-left: 15px; margin: 10px 0; }
+        .cta-button { display: inline-block; background: linear-gradient(135deg, #00f5ff 0%, #3b82f6 100%); color: #ffffff; padding: 12px 30px; text-decoration: none; border-radius: 6px; font-weight: bold; margin: 20px 0; }
+        .footer { text-align: center; margin-top: 40px; padding: 20px; border-top: 1px solid rgba(0, 245, 255, 0.2); color: #94a3b8; }
+        .security-tip { background: rgba(239, 68, 68, 0.1); border: 1px solid rgba(239, 68, 68, 0.3); padding: 15px; border-radius: 6px; margin: 20px 0; }
+      </style>
+    </head>
+    <body>
+      <div class="container">
+        <div class="header">
+          <div class="logo">🛡️ EthiTesterAI</div>
+          <div class="welcome-text">Welcome ${userName}!</div>
+        </div>
+        
+        <div class="content">
           <div class="section">
             <h3>🚀 Getting Started</h3>
-            <p>Your EthiTesterAI account is now active! Here's what you can do:</p>
+            <p>Thank you for joining EthiTesterAI! You now have access to our advanced AI-powered penetration testing platform.</p>
+            
+            <h4>Your First Steps:</h4>
             <ul class="feature-list">
-              <li><strong>Dashboard Overview:</strong> Monitor your security posture in real-time</li>
-              <li><strong>Network Scanning:</strong> Perform comprehensive network security assessments</li>
-              <li><strong>Vulnerability Assessment:</strong> Identify and prioritize security vulnerabilities</li>
-              <li><strong>AI-Powered Reports:</strong> Generate detailed penetration testing reports</li>
-              <li><strong>Risk Mitigation:</strong> Get actionable security recommendations</li>
+              <li>Complete your profile setup in the dashboard</li>
+              <li>Review our security guidelines and best practices</li>
+              <li>Start with a basic network scan to familiarize yourself</li>
+              <li>Explore our vulnerability assessment tools</li>
             </ul>
           </div>
 
           <div class="section">
-            <h3>📋 Quick Start Guide</h3>
-            <ol>
-              <li><strong>Login to Dashboard:</strong> Access your personalized security dashboard</li>
-              <li><strong>Configure Network Scan:</strong> Set up your first network security assessment
-                <ul style="margin-top: 10px; color: #64748b;">
-                  <li>Enter target IP addresses or domains</li>
-                  <li>Select scan type (Quick, Comprehensive, Custom)</li>
-                  <li>Configure scope and priority levels</li>
-                </ul>
-              </li>
-              <li><strong>Review Results:</strong> Analyze vulnerabilities and security findings</li>
-              <li><strong>Generate Reports:</strong> Create professional PDF reports for stakeholders</li>
-              <li><strong>Implement Mitigations:</strong> Follow AI-powered security recommendations</li>
-            </ol>
+            <h3>🔧 Platform Features</h3>
+            <ul class="feature-list">
+              <li><strong>Network Scanning:</strong> Comprehensive port and service discovery</li>
+              <li><strong>Vulnerability Assessment:</strong> AI-powered security analysis</li>
+              <li><strong>Report Generation:</strong> Professional PDF reports with findings</li>
+              <li><strong>Risk Mitigation:</strong> Actionable security recommendations</li>
+              <li><strong>Real-time Monitoring:</strong> Live security alerts and notifications</li>
+            </ul>
           </div>
 
           <div class="section">
-            <h3>🔧 Key Features</h3>
+            <h3>📚 User Manual</h3>
+            <h4>Dashboard Navigation:</h4>
             <ul class="feature-list">
-              <li><strong>AI-Powered Analysis:</strong> Advanced machine learning for threat detection</li>
-              <li><strong>Real-time Monitoring:</strong> Continuous security posture assessment</li>
-              <li><strong>Compliance Reporting:</strong> Meet industry standards and regulations</li>
-              <li><strong>Integration Ready:</strong> Connect with SIEM, SOC, and security tools</li>
-              <li><strong>Team Collaboration:</strong> Share findings and coordinate responses</li>
+              <li><strong>Overview:</strong> Security posture summary and recent activity</li>
+              <li><strong>Network Scan:</strong> Configure and execute network assessments</li>
+              <li><strong>Vulnerability Assessment:</strong> Detailed security analysis</li>
+              <li><strong>Reports:</strong> View and download security reports</li>
+              <li><strong>Risk Mitigation:</strong> Security recommendations and best practices</li>
+              <li><strong>Settings:</strong> Account and system configuration</li>
+            </ul>
+
+            <h4>Running Your First Scan:</h4>
+            <ul class="feature-list">
+              <li>Navigate to "Network Scan" in the sidebar</li>
+              <li>Enter your target IP address or domain</li>
+              <li>Select scan type (Quick, Comprehensive, or Custom)</li>
+              <li>Configure scope and priority settings</li>
+              <li>Click "Start Security Scan" to begin</li>
             </ul>
           </div>
 
           <div class="security-tip">
-            <strong>🔒 Security Tip:</strong> Always ensure you have proper authorization before conducting any penetration testing activities. EthiTesterAI is designed for ethical security testing only.
+            <h3>⚠️ Important Security Guidelines</h3>
+            <ul>
+              <li>Only test systems you own or have explicit permission to test</li>
+              <li>Follow responsible disclosure practices for any vulnerabilities found</li>
+              <li>Keep your findings confidential and secure</li>
+              <li>Use the platform for educational and defensive purposes only</li>
+            </ul>
           </div>
 
           <div class="section">
-            <h3>📞 Support & Resources</h3>
-            <p>Need help getting started? Our team is here to support you:</p>
+            <h3>🆘 Support & Resources</h3>
             <ul class="feature-list">
               <li><strong>Documentation:</strong> Comprehensive guides and tutorials</li>
-              <li><strong>Video Tutorials:</strong> Step-by-step walkthrough videos</li>
               <li><strong>Community Forum:</strong> Connect with other security professionals</li>
               <li><strong>24/7 Support:</strong> Technical assistance when you need it</li>
+              <li><strong>Training Materials:</strong> Enhance your cybersecurity skills</li>
             </ul>
           </div>
 
           <div style="text-align: center;">
-            <a href="${process.env.NEXTAUTH_URL}/dashboard" class="cta-button">
-              Access Your Dashboard →
-            </a>
-          </div>
-
-          <div class="footer">
-            <p><strong>EthiTesterAI</strong> - Advanced Network Penetration Testing Platform</p>
-            <p>© 2025 EthiTesterAI - Project Societe Generale. All rights reserved.</p>
-            <p>This email was sent to ${userEmail}. If you didn't create this account, please contact our support team.</p>
+            <a href="${process.env.NEXTAUTH_URL}/dashboard" class="cta-button">Access Your Dashboard</a>
           </div>
         </div>
-      </body>
-      </html>
-    `,
+
+        <div class="footer">
+          <p>© 2025 EthiTesterAI - Project Societe Generale</p>
+          <p>Advanced AI-Powered Network Penetration Testing Platform</p>
+          <p>If you have any questions, reply to this email or contact our support team.</p>
+        </div>
+      </div>
+    </body>
+    </html>
+  `
+
+  const mailOptions = {
+    from: `"EthiTesterAI Team" <${process.env.EMAIL_USER}>`,
+    to: userEmail,
+    subject: `Welcome ${userName} - Your EthiTesterAI Account is Ready!`,
+    html: htmlContent,
+    text: `Welcome ${userName}! Thank you for joining EthiTesterAI. Access your dashboard at ${process.env.NEXTAUTH_URL}/dashboard to get started with AI-powered penetration testing.`,
   }
 
   try {
@@ -193,51 +138,27 @@ export const sendWelcomeEmail = async (userEmail: string, userName: string) => {
   }
 }
 
-export const sendNotificationEmail = async (
-  userEmail: string,
-  subject: string,
-  message: string,
-  type: "info" | "warning" | "critical" = "info",
-) => {
-  const colors = {
-    info: "#0ea5e9",
-    warning: "#f59e0b",
-    critical: "#ef4444",
-  }
-
+export const sendNotificationEmail = async (userEmail: string, subject: string, message: string) => {
   const mailOptions = {
-    from: process.env.EMAIL_USER,
+    from: `"EthiTesterAI Security" <${process.env.EMAIL_USER}>`,
     to: userEmail,
     subject: `EthiTesterAI Alert: ${subject}`,
     html: `
-      <!DOCTYPE html>
-      <html>
-      <head>
-        <style>
-          body { font-family: Inter, sans-serif; line-height: 1.6; color: #333; }
-          .container { max-width: 600px; margin: 0 auto; padding: 20px; }
-          .alert { 
-            border-left: 4px solid ${colors[type]}; 
-            background: #f8fafc; 
-            padding: 20px; 
-            border-radius: 8px; 
-          }
-          .header { color: ${colors[type]}; font-size: 18px; font-weight: bold; }
-        </style>
-      </head>
-      <body>
-        <div class="container">
-          <div class="alert">
-            <div class="header">${subject}</div>
-            <p>${message}</p>
-          </div>
-          <p style="margin-top: 20px; color: #64748b; font-size: 14px;">
+      <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; background: #0f172a; color: #ffffff;">
+        <div style="text-align: center; padding: 20px; background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%); border-radius: 8px;">
+          <h2 style="margin: 0; color: #ffffff;">🚨 Security Alert</h2>
+        </div>
+        <div style="padding: 20px; background: rgba(30, 41, 59, 0.8); border-radius: 8px; margin-top: 20px;">
+          <h3 style="color: #00f5ff;">${subject}</h3>
+          <p>${message}</p>
+          <p style="margin-top: 30px; color: #94a3b8;">
+            This is an automated security notification from EthiTesterAI.<br>
             © 2025 EthiTesterAI - Project Societe Generale
           </p>
         </div>
-      </body>
-      </html>
+      </div>
     `,
+    text: `Security Alert: ${subject}\n\n${message}\n\nEthiTesterAI Security Team`,
   }
 
   try {
@@ -248,5 +169,3 @@ export const sendNotificationEmail = async (
     throw error
   }
 }
-
-export default transporter
