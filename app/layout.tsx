@@ -27,27 +27,25 @@ const poppins = Poppins({
 
 export const metadata: Metadata = {
   title: "EthiTesterAI - Advanced Network Penetration Testing",
-  description: "AI-powered network security testing and vulnerability assessment platform",
-  keywords: ["penetration testing", "cybersecurity", "network security", "vulnerability assessment", "AI security"],
+  description: "AI-powered cybersecurity platform for ethical penetration testing and vulnerability assessment",
+  keywords: "penetration testing, cybersecurity, AI, vulnerability assessment, network security",
   authors: [{ name: "EthiTesterAI Team" }],
   creator: "Project Societe Generale",
   publisher: "EthiTesterAI",
   robots: "index, follow",
   viewport: "width=device-width, initial-scale=1",
-  themeColor: "#1e40af",
+  themeColor: "#0ea5e9",
   openGraph: {
+    title: "EthiTesterAI - Advanced Network Penetration Testing",
+    description: "AI-powered cybersecurity platform for ethical penetration testing",
     type: "website",
     locale: "en_US",
-    url: "https://ethitesterai.com",
-    title: "EthiTesterAI - Advanced Network Penetration Testing",
-    description: "AI-powered network security testing and vulnerability assessment platform",
     siteName: "EthiTesterAI",
   },
   twitter: {
     card: "summary_large_image",
     title: "EthiTesterAI - Advanced Network Penetration Testing",
-    description: "AI-powered network security testing and vulnerability assessment platform",
-    creator: "@ethitesterai",
+    description: "AI-powered cybersecurity platform for ethical penetration testing",
   },
     generator: 'v0.dev'
 }
@@ -62,12 +60,10 @@ export default function RootLayout({
       <head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        <link rel="icon" href="/favicon.ico" />
-        <meta name="theme-color" content="#1e40af" />
       </head>
       <body className={`${inter.variable} ${jetbrainsMono.variable} ${poppins.variable} font-sans antialiased`}>
         <Providers>
-          <ThemeProvider attribute="class" defaultTheme="dark" enableSystem={false} disableTransitionOnChange>
+          <ThemeProvider attribute="class" defaultTheme="dark" enableSystem disableTransitionOnChange>
             {children}
             <Toaster />
           </ThemeProvider>
